@@ -1,9 +1,19 @@
-var startButton = document.querySelector("#submit");
+var startButton = document.getElementById("#submit");
+var timerEl = document.getElementById("#timer");
 
+var secondsLeft = 3;
 
+function setTime() {
+  var startTime = setInterval(function () {
+    secondsLeft--;
+    console.log(secondsLeft);
 
-function beginExam(event){
-console.log("You started the exam!");
-
+    if (secondsLeft === 0) {
+      clearInterval(startTime);
+      alert("Time!");
+    }
+  }, 1000);
 }
-document.addEventListener("click", beginExam)
+
+
+document.addEventListener("click", setTime);
