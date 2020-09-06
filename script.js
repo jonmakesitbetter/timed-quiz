@@ -15,4 +15,4 @@ function setTime() {
 
   }, 1000);
 }
-startButton.addEventListener("click", setTime);
+document.addEventListener("click", setTime);
