@@ -1,7 +1,7 @@
 var timeEl = document.querySelector(".time");
 var startButton = document.getElementById("#start-btn");
 
-var secondsLeft = 10;
+var secondsLeft = 90;
 
 function setTime() {
   var timerInterval = setInterval(function() {
@@ -15,4 +15,4 @@ function setTime() {
 
   }, 1000);
 }
-document.addEventListener("click", setTime);
+startButton.addEventListener("click", setTime);
