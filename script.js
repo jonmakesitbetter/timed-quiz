@@ -1,19 +1,18 @@
+var timeEl = document.querySelector(".time");
 var startButton = document.getElementById("#start-btn");
-var timerEl = document.getElementById("#timer");
 
-var secondsLeft = 3;
+var secondsLeft = 10;
 
 function setTime() {
-  var startTime = setInterval(function () {
+  var timerInterval = setInterval(function() {
     secondsLeft--;
-    console.log(secondsLeft);
+    timeEl.textContent = secondsLeft;
 
-    if (secondsLeft === 0) {
-      clearInterval(startTime);
+    if(secondsLeft === 0) {
+      clearInterval(timerInterval);
       alert("Time!");
     }
+
   }, 1000);
 }
-
-
 document.addEventListener("click", setTime);
