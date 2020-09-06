@@ -1,4 +1,4 @@
-var startButton = document.getElementById("#submit");
+var startButton = document.getElementById("#start-btn");
 var timerEl = document.getElementById("#timer");
 
 var secondsLeft = 3;
