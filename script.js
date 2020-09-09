@@ -4,7 +4,7 @@ var startButtonEl = document.getElementById("start-button");
 // var answerButtonEl = document.querySelector(".answerButton");
 var secondsLeft = 90;
 var score = document.getElementById("score");
-var questionsEl = document.querySelector(".card-body");
+var questionsEl = document.getElementById("question-box");
 var answers = document.getElementById("answer-buttons");
 var questionsIndex = 0; 
 
@@ -15,9 +15,7 @@ function setTime(event) {
   var timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
-    // quizObject.questionsIndex = 0;
 
-    //Need to add final score prompt to secondsLeft === 0
     if (secondsLeft === 0) {
       clearInterval(timerInterval);
       alert("Time!");
@@ -43,23 +41,23 @@ var quizArray = [
   {
     question: "The condition in an if/else statement is enclosed within _______",
     answers: ["Quotes", "Curly brackets", "Parentheses", "Square brackets"],
-    correct: ""
+    correct: "Curly brackets"
   },
   {
-    question: "This is another question",
-    answers: ["answer 1", "answer 2", "answer 3"],
-    correct: ""
+    question: "Arrays in JavaScript can be used to store _______",
+    answers: ["Numbers and strings", "Other arrays", "Booleans", "All of the above"],
+    correct: "All of the above"
   },
 ]
-
-// }, "A very useful tool during development and debugging for printing content to the debugger is ", "Question 3"]
-  
-
-
+var questionPopulate = document.createElement("h1");
+questionPopulate.textContent = quizArray[questionsIndex].question;
+questionsEl.append(questionPopulate);
 function nextQuestion(){
 
   if (questionsIndex < quizArray.length){
-
+var questionPopulate = document.createElement("h1");
+questionPopulate.textContent = quizArray[questionsIndex].question;
+questionsEl.append(questionPopulate);
     //empty questions & answers 
     //show question (create tag add content and append)
  
