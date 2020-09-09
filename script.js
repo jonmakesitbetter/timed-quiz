@@ -7,6 +7,7 @@ var questionsEl = document.getElementById("question-box");
 var answersEl = document.querySelector(".answer-buttons");
 var questionsIndex = 0;
 
+startButtonEl.setAttribute("style", "background-color: blue;");
 //Timer starter
 function setTime(event) {
   event.preventDefault();
@@ -57,8 +58,9 @@ var quizArray = [
 ];
 
 function nextQuestion() {
+
   if (questionsIndex < quizArray.length) {
-    var questionPopulate = document.createElement("h1");
+    var questionPopulate = document.createElement("ul");
     questionPopulate.textContent = quizArray[questionsIndex].question;
     questionsEl.append(questionPopulate);
 
@@ -68,8 +70,12 @@ function nextQuestion() {
       var answerRun = quizArray[questionsIndex].answers[i];
 
       var answersPopulate = document.createElement("button");
+      // add button class here
       answersPopulate.textContent = answerRun;
       answersEl.append(answersPopulate);
+      // add event listener for button choice here
+      answersPopulate.addEventListener("click", nextQuestion);
+      // call function for buttons inside this function that cycle to next question. Leif says put questionsIndex++ here
     }
  
     //show question (create tag add content and append)
@@ -81,12 +87,13 @@ function nextQuestion() {
     console.log("no more questions");
   }
 }
-
+document.getElementsByTagName("H1")[0].setAttribute("class", "democlass");
 //here, we will have the questions index display its current [i] position, thus showing the question and
 //answer buttons. Then log the answers and then set current index to the next one by question[i++], end by
 //calling this function, thus repeating the process with the next question object in the array.
 
 startButtonEl.addEventListener("click", setTime);
 startButtonEl.addEventListener("click", nextQuestion);
+// document.getElementsByTagName("button").addEventListener("click", nextQuestion());
 
-// answerButtonEl.addEventListener("click", nextQuestion);
+//myButton.textContent = quizArray[questionsIndex].answers[i]; ???
