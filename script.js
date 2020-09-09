@@ -58,36 +58,43 @@ var quizArray = [
 ];
 
 function nextQuestion() {
-
   if (questionsIndex < quizArray.length) {
-    var questionPopulate = document.createElement("ul");
+    questionsEl.innerHTML = "";
+    var questionPopulate = document.createElement("h1");
     questionPopulate.textContent = quizArray[questionsIndex].question;
     questionsEl.append(questionPopulate);
 
+    answersEl.innerHTML = "";
 
     //empty questions & answers
-    for (var i = 0; i < quizArray[questionsIndex].answers.length; i++){
+    for (var i = 0; i < quizArray[questionsIndex].answers.length; i++) {
       var answerRun = quizArray[questionsIndex].answers[i];
-
       var answersPopulate = document.createElement("button");
-      // add button class here
+
       answersPopulate.textContent = answerRun;
       answersEl.append(answersPopulate);
       // add event listener for button choice here
       answersPopulate.addEventListener("click", nextQuestion);
+      
       // call function for buttons inside this function that cycle to next question. Leif says put questionsIndex++ here
     }
- 
-    //show question (create tag add content and append)
-
-    //loop through answers and add to DOM (create tag add content and append)
     questionsIndex++;
-   //move to next question
+    //move to next question
   } else {
-    console.log("no more questions");
+    finalScore();
   }
 }
-document.getElementsByTagName("H1")[0].setAttribute("class", "democlass");
+function finalScore(){
+  questionsEl.innerHTML = "";
+  answersEl.innerHTML = "";
+  var allDone = document.createElement("h1");
+  var yourScore = document.createElement("h2");
+  allDone.textContent = "All done!";
+  yourScore.textContent = "Your score is " + score + ".";
+  questionPopulate.append(allDone);
+  questionPopulate.append(yourScore);
+
+}
 //here, we will have the questions index display its current [i] position, thus showing the question and
 //answer buttons. Then log the answers and then set current index to the next one by question[i++], end by
 //calling this function, thus repeating the process with the next question object in the array.
