@@ -1,20 +1,17 @@
 //Global variables
 var timeEl = document.querySelector(".time");
-var startButtonEl = document.getElementById("start-btn");
+var startButtonEl = document.getElementById("start-button");
 // var answerButtonEl = document.querySelector(".answerButton");
 var secondsLeft = 90;
 var score = document.getElementById("score");
-var questionsEl = document.getElementById("question-box");
+var questionsEl = document.querySelector(".card-body");
 var answers = document.getElementById("answer-buttons");
 var questionsIndex = 0; 
-questionsEl.style.display = "none";
-answers.style.display = "none";
+
 //Timer starter
 function setTime(event) {
   event.preventDefault();
   startButtonEl.style.display = "none";
-  questionsEl.style.display = "block";
-  answers.style.display = "block";
   var timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
@@ -35,17 +32,17 @@ function timerSubtract() {
 var quizArray = [
   {
     question: "Commonly used data types DO NOT include ______.",
-    answers: ["answer 1", "answer 2", "answer 3"],
-    correct: ""
+    answers: ["Strings", "Booleans", "Alerts", "Numbers"],
+    correct: "Alerts"
   },
   {
-    question: "This is another question",
-    answers: ["answer 1", "answer 2", "answer 3"],
-    correct: ""
+    question: "A very useful tool during development and debugging for printing content to the debugger is _______",
+    answers: ["JavaScript", "Console log", "For loops", "Bash terminal"],
+    correct: "Console log"
   },
   {
-    question: "Commonly used data types DO NOT include ______.",
-    answers: ["answer 1", "answer 2", "answer 3"],
+    question: "The condition in an if/else statement is enclosed within _______",
+    answers: ["Quotes", "Curly brackets", "Parentheses", "Square brackets"],
     correct: ""
   },
   {
@@ -61,10 +58,11 @@ var quizArray = [
 
 function nextQuestion(){
 
-  if (questionsIndex < quizArray.length){ 
+  if (questionsIndex < quizArray.length){
+
     //empty questions & answers 
     //show question (create tag add content and append)
-    console.log(quizArray[questionsIndex].question);
+ 
     //loop through answers and add to DOM (create tag add content and append)
     questionsIndex++; //move to next question
   } else {
