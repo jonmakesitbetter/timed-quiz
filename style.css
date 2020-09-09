@@ -3,13 +3,21 @@ h1 {
     text-align: center;
 }
 #start-btn {
-    margin-left: 44%;
-    margin-right: 44%;
+    margin-top: 35%;
+    margin-left: 35%;
+    float:left;
 }
 .time {
     float: right;
 }
-#main-container{
+/* #main-container{
     text-align:center;
+    
+} */
+.container-box{
+    height: 10rem;
+    width: 10rem;
+    background-color:rgb(201, 196, 196);
+    margin-left: 42%;
     
 }

@@ -1,49 +1,82 @@
 //Global variables
 var timeEl = document.querySelector(".time");
-var startButtonEl = document.getElementById('start-btn');
-var answerButtonEl = document.querySelector(".answerButton");
+var startButtonEl = document.getElementById("start-btn");
+// var answerButtonEl = document.querySelector(".answerButton");
 var secondsLeft = 90;
-
-var questionsEl = document.getElementById('question-box');
-var answers = document.getElementById('answer-buttons');
+var score = document.getElementById("score");
+var questionsEl = document.getElementById("question-box");
+var answers = document.getElementById("answer-buttons");
+var questionsIndex = 0; 
 questionsEl.style.display = "none";
 answers.style.display = "none";
-//Timer starter and first question prompt
-function setTime() {
-  var timerInterval = setInterval(function() {   
-    questionsEl.style.display = "block";
-    answers.style.display = "block";
+//Timer starter
+function setTime(event) {
+  event.preventDefault();
+  startButtonEl.style.display = "none";
+  questionsEl.style.display = "block";
+  answers.style.display = "block";
+  var timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
-    startButtonEl.style.display = "none";
-    quizObject.questionsIndex = 0;
-     
+    // quizObject.questionsIndex = 0;
+
     //Need to add final score prompt to secondsLeft === 0
-    if(secondsLeft === 0) {
+    if (secondsLeft === 0) {
       clearInterval(timerInterval);
       alert("Time!");
     }
-
   }, 1000);
 }
-function timerSubtract(){
+function timerSubtract() {
   secondsLeft - 15;
 }
 //Questions object containing an array of question objects.
 
-let quizObject = {
-  "questionsIndex": ["Question 1", "Question 2", "Question 3"],
-  "answerIndex": ["Answer 1", "Answer 2", "Answer 3"]
-}
+var quizArray = [
+  {
+    question: "Commonly used data types DO NOT include ______.",
+    answers: ["answer 1", "answer 2", "answer 3"],
+    correct: ""
+  },
+  {
+    question: "This is another question",
+    answers: ["answer 1", "answer 2", "answer 3"],
+    correct: ""
+  },
+  {
+    question: "Commonly used data types DO NOT include ______.",
+    answers: ["answer 1", "answer 2", "answer 3"],
+    correct: ""
+  },
+  {
+    question: "This is another question",
+    answers: ["answer 1", "answer 2", "answer 3"],
+    correct: ""
+  },
+]
+
+// }, "A very useful tool during development and debugging for printing content to the debugger is ", "Question 3"]
+  
+
 
 function nextQuestion(){
-  questionsEl.textContent = quizObject.questionsIndex[0];
+
+  if (questionsIndex < quizArray.length){ 
+    //empty questions & answers 
+    //show question (create tag add content and append)
+    console.log(quizArray[questionsIndex].question);
+    //loop through answers and add to DOM (create tag add content and append)
+    questionsIndex++; //move to next question
+  } else {
+    console.log("no more questions")
+  }
 }
+
+
 //here, we will have the questions index display its current [i] position, thus showing the question and
 //answer buttons. Then log the answers and then set current index to the next one by question[i++], end by
 //calling this function, thus repeating the process with the next question object in the array.
 
-
 // answerButton.addEventListener("click", nextQuestion());
-startButtonEl.addEventListener("click", setTime, nextQuestion);
-answerButtonEl.addEventListener("click", nextQuestion);
+startButtonEl.addEventListener("click", setTime);
+// answerButtonEl.addEventListener("click", nextQuestion);
