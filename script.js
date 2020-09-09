@@ -3,10 +3,12 @@ var timeEl = document.querySelector(".time");
 var startButtonEl = document.getElementById("start-button");
 var secondsLeft = 90;
 var score = document.getElementById("score");
+score = 0;
 var questionsEl = document.getElementById("question-box");
 var answersEl = document.querySelector(".answer-buttons");
 var questionsIndex = 0;
-
+var testScoreInput = document.querySelector(".form-control");
+testScoreInput.style.display = "none";
 startButtonEl.setAttribute("style", "background-color: blue;");
 //Timer starter
 function setTime(event) {
@@ -85,14 +87,15 @@ function nextQuestion() {
   }
 }
 function finalScore(){
+  testScoreInput.style.display = "block";
   questionsEl.innerHTML = "";
   answersEl.innerHTML = "";
   var allDone = document.createElement("h1");
   var yourScore = document.createElement("h2");
   allDone.textContent = "All done!";
   yourScore.textContent = "Your score is " + score + ".";
-  questionPopulate.append(allDone);
-  questionPopulate.append(yourScore);
+  questionsEl.append(allDone);
+  questionsEl.append(yourScore);
 
 }
 //here, we will have the questions index display its current [i] position, thus showing the question and
