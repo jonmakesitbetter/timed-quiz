@@ -1,13 +1,12 @@
 //Global variables
 var timeEl = document.querySelector(".time");
 var startButtonEl = document.getElementById("start-button");
-// var answerButtonEl = document.querySelector(".answerButton");
 var secondsLeft = 90;
 var score = document.getElementById("score");
 var questionsEl = document.getElementById("question-box");
-var answersEl = document.getElementById("answer-buttons");
+var answersEl = document.querySelector(".answer-buttons");
 var questionsIndex = 0;
-var answersIndex = 0;
+
 //Timer starter
 function setTime(event) {
   event.preventDefault();
@@ -62,12 +61,16 @@ function nextQuestion() {
     var questionPopulate = document.createElement("h1");
     questionPopulate.textContent = quizArray[questionsIndex].question;
     questionsEl.append(questionPopulate);
+
+
     //empty questions & answers
-    // for (var i = 0; i < quizArray.answers.length; i++){
-    //   var answersPopulate = document.createElement("button");
-    //   answersPopulate.textContent = quizArray[questionsIndex].answers;
-    //   answersEl.append(answersPopulate);
-    // }
+    for (var i = 0; i < quizArray[questionsIndex].answers.length; i++){
+      var answerRun = quizArray[questionsIndex].answers[i];
+
+      var answersPopulate = document.createElement("button");
+      answersPopulate.textContent = answerRun;
+      answersEl.append(answersPopulate);
+    }
  
     //show question (create tag add content and append)
 
@@ -83,7 +86,7 @@ function nextQuestion() {
 //answer buttons. Then log the answers and then set current index to the next one by question[i++], end by
 //calling this function, thus repeating the process with the next question object in the array.
 
-// answerButton.addEventListener("click", nextQuestion());
 startButtonEl.addEventListener("click", setTime);
 startButtonEl.addEventListener("click", nextQuestion);
+
 // answerButtonEl.addEventListener("click", nextQuestion);
