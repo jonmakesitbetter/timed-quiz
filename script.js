@@ -2,12 +2,13 @@
 var timeEl = document.querySelector(".time");
 var startButtonEl = document.getElementById("start-button");
 var secondsLeft = 90;
-var score = document.getElementById("score");
-score = 0;
+var score = 0;
 var questionsEl = document.getElementById("question-box");
 var answersEl = document.querySelector(".answer-buttons");
 var questionsIndex = 0;
-var testScoreButton = document.querySelector("#submit-initials");
+var currentQuestion = {};
+var messageDiv = document.getElementById("message-div");
+// var testScoreButton = document.querySelector("#submit-initials");
 var textInput = document.querySelector(".text-input");
 startButtonEl.setAttribute("style", "background-color: blue;");
 //Timer starter
@@ -45,7 +46,7 @@ var quizArray = [
     question:
       "The condition in an if/else statement is enclosed within _______",
     answers: ["Quotes", "Curly brackets", "Parentheses", "Square brackets"],
-    correct: "Curly brackets",
+    correct: "Parentheses",
   },
   {
     question: "Arrays in JavaScript can be used to store _______",
@@ -63,45 +64,28 @@ function nextQuestion() {
   if (questionsIndex < quizArray.length) {
     questionsEl.innerHTML = "";
     var questionPopulate = document.createElement("h1");
-    questionPopulate.textContent = quizArray[questionsIndex].question;
+    currentQuestion = quizArray[questionsIndex];
+    questionPopulate.textContent = currentQuestion.question;
     questionsEl.append(questionPopulate);
 
     answersEl.innerHTML = "";
 
     //empty questions & answers
-    for (var i = 0; i < quizArray[questionsIndex].answers.length; i++) {
-      var answerRun = quizArray[questionsIndex].answers[i];
+    for (var i = 0; i < currentQuestion.answers.length; i++) {
+      var answerRun = currentQuestion.answers[i];
       var answersPopulate = document.createElement("button");
 
       answersPopulate.textContent = answerRun;
       answersEl.append(answersPopulate);
- 
+
       answersPopulate.addEventListener("click", nextQuestion);
 
-      answersPopulate.addEventListener("click", function(event){
+      answersPopulate.addEventListener("click", function (event) {
         event.preventDefault();
-        if(event.target.matches("button")) {
-          console.log("It works!");
+        if ((event.target.textContent = currentQuestion.correct)) {
+          score++;
         }
-      })
-      
-
-
-
-      // listEl.addEventListener("click", function(event) {
-      //   event.preventDefault();
-      //   if(event.target.matches("button")) {
-      //     var item = document.createElement("div");
-      //     item.textContent = groceries[event.target.parentElement.id];
-      //     shoppingCartEl.append(item);
-      //   }
-      // });
-
-
-
-
-      // console.log(quizArray[questionsIndex].answers[i].);
-
+      });
     }
     questionsIndex++;
     //move to next question
@@ -109,9 +93,14 @@ function nextQuestion() {
     finalScore();
   }
 }
-function finalScore(){
+//Final score DOM elements
+function finalScore() {
   questionsEl.innerHTML = "";
   answersEl.innerHTML = "";
+
+  var submitInitialsBtn = document.createElement("button");
+  submitInitialsBtn.textContent = "Submit";
+  questionsEl.append(submitInitialsBtn);
 
   var testText = document.createElement("input");
   testText.textContent = "";
@@ -124,16 +113,28 @@ function finalScore(){
   allDone.textContent = "All done!";
   yourScore.textContent = "Your score is " + score + ".";
   yourInitials.textContent = "Enter your initials: ";
-  
+
   questionsEl.append(allDone);
   questionsEl.append(yourScore);
-  textInput.append(yourInitials);
+  questionsEl.append(yourInitials);
 
+  submitInitialsBtn.addEventListener("click", highScore);
 }
+function highScore(event) {
+  event.preventDefault();
+  questionsEl.innerHTML = "";
+  var scoreBoard = document.createElement("h1");
+  scoreBoard.textContent = score;
+  questionsEl.append(scoreBoard);
 
-//here, we will have the questions index display its current [i] position, thus showing the question and
-//answer buttons. Then log the answers and then set current index to the next one by question[i++], end by
-//calling this function, thus repeating the process with the next question object in the array.
+  subtmitInitialsBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    var initials = testText.textContent().value;
+
+    localStorage.setItem("initials", initials);
+  });
+}
 
 startButtonEl.addEventListener("click", setTime);
 startButtonEl.addEventListener("click", nextQuestion);

@@ -1,19 +1,14 @@
 h1 {
-    color:violet;
+    color:rgb(137, 10, 168);
     text-align: center;
 }
-#start-button {
-    background-color:rgb(133, 24, 206);
-}
+
 .time {
     float: right;
 }
 #main-container{
     text-align:center;
+    margin-right:50%;
     
 } 
-.container-box{
 
-    margin-left: 42%;
-    
-} 
