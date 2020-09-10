@@ -7,8 +7,8 @@ score = 0;
 var questionsEl = document.getElementById("question-box");
 var answersEl = document.querySelector(".answer-buttons");
 var questionsIndex = 0;
-var testScoreInput = document.querySelector(".form-control");
-testScoreInput.style.display = "none";
+var testScoreButton = document.querySelector("#submit-initials");
+var textInput = document.querySelector(".text-input");
 startButtonEl.setAttribute("style", "background-color: blue;");
 //Timer starter
 function setTime(event) {
@@ -75,10 +75,33 @@ function nextQuestion() {
 
       answersPopulate.textContent = answerRun;
       answersEl.append(answersPopulate);
-      // add event listener for button choice here
+ 
       answersPopulate.addEventListener("click", nextQuestion);
+
+      answersPopulate.addEventListener("click", function(event){
+        event.preventDefault();
+        if(event.target.matches("button")) {
+          console.log("It works!");
+        }
+      })
       
-      // call function for buttons inside this function that cycle to next question. Leif says put questionsIndex++ here
+
+
+
+      // listEl.addEventListener("click", function(event) {
+      //   event.preventDefault();
+      //   if(event.target.matches("button")) {
+      //     var item = document.createElement("div");
+      //     item.textContent = groceries[event.target.parentElement.id];
+      //     shoppingCartEl.append(item);
+      //   }
+      // });
+
+
+
+
+      // console.log(quizArray[questionsIndex].answers[i].);
+
     }
     questionsIndex++;
     //move to next question
@@ -87,23 +110,30 @@ function nextQuestion() {
   }
 }
 function finalScore(){
-  testScoreInput.style.display = "block";
   questionsEl.innerHTML = "";
   answersEl.innerHTML = "";
+
+  var testText = document.createElement("input");
+  testText.textContent = "";
+  questionsEl.append(testText);
+
   var allDone = document.createElement("h1");
   var yourScore = document.createElement("h2");
+  var yourInitials = document.createElement("h2");
+
   allDone.textContent = "All done!";
   yourScore.textContent = "Your score is " + score + ".";
+  yourInitials.textContent = "Enter your initials: ";
+  
   questionsEl.append(allDone);
   questionsEl.append(yourScore);
+  textInput.append(yourInitials);
 
 }
+
 //here, we will have the questions index display its current [i] position, thus showing the question and
 //answer buttons. Then log the answers and then set current index to the next one by question[i++], end by
 //calling this function, thus repeating the process with the next question object in the array.
 
 startButtonEl.addEventListener("click", setTime);
 startButtonEl.addEventListener("click", nextQuestion);
-// document.getElementsByTagName("button").addEventListener("click", nextQuestion());
-
-//myButton.textContent = quizArray[questionsIndex].answers[i]; ???
